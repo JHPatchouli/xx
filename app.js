@@ -111,5 +111,4 @@
     }
     this.dt++;
   }
-
 window.onload = new Application();
