@@ -1,6 +1,5 @@
 /*app.js*/
-class Application {
-  constructor() {
+
     this.canvas = null; // 画布
     this.ctx = null; // 环境
     this.w = 0; // 画布宽
@@ -19,15 +18,14 @@ class Application {
     this.shadowColor = "rgba(255,255,255,.5)"; // 投影色
     this.centerY = 0; // y轴固定点
     this.init();
-  }
-  init() {
+  function init() {
     // 初始化
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
     window.addEventListener("resize", this.reset.bind(this));
     this.render();
   }
-  reset() {
+  function reset() {
     // 屏幕变化
     this.w = this.canvas.width = this.ctx.width = window.innerWidth;
     this.h = this.canvas.height = this.ctx.height = window.innerHeight;
@@ -35,19 +33,19 @@ class Application {
     this.y = this.centerY;
     this.clear();
   }
-  clear() {
+ function clear() {
     // 清空
     this.lineData.length = 0;
     this.active = 0;
     this.x = 0;
     this.ctx.clearRect(0, 0, this.w, this.h);
   }
-  render() {
+  function render() {
     // 主渲染
     this.reset();
     this.step();
   }
-  drawTopLine() {
+  function drawTopLine() {
     // 白线
     const {
       ctx,
@@ -84,7 +82,7 @@ class Application {
     this.x = x1;
     this.y = y1;
   }
-  drawLine() {
+  function drawLine() {
     // 红线
     const { ctx, shadowColor, lineColor, maxHeight, lineData } = this;
     if (lineData.length < 2) return;
@@ -101,7 +99,7 @@ class Application {
     ctx.closePath();
   }
 
-  step() {
+  function step() {
     // 重绘
     requestAnimationFrame(this.step.bind(this));
     if (this.dt % 2 == 0) {
@@ -113,6 +111,5 @@ class Application {
     }
     this.dt++;
   }
-}
 
 window.onload = new Application();
